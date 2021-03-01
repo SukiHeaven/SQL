@@ -1,0 +1,601 @@
+drop table if exists Employer,Acheter,Client,Piece,Voiture,Usine,Garagiste,Vendeur,Concessionnaire ;
+
+CREATE TABLE Concessionnaire(
+	Adresse varchar (40) NOT NULL,
+	Num_tel char (14) NOT NULL,
+	Nom varchar (26) NOT NULL, 
+	PRIMARY KEY (Adresse),
+	UNIQUE (Num_tel)
+	);
+
+INSERT INTO Concessionnaire VALUES
+	('50 rue Bejamin, 75014'		  ,'06 11 19 18 50','Renault'),
+	('35 rue des fleuries, 92000'	  ,'06 50 27 29 54','Peugeot'),
+	('10 rue generale de gaule, 91100','06 51 52 41 02','Dacia'),
+	('23 rue gambetta, 77000'		  ,'06 51 84 95 32','Citroen'),
+	('08 rue de Berry , 93120'		  ,'06 54 64 74 04','Fiat'),
+	('15 rue Charles Paradinas, 92110','06 81 52 74 05','Ford');
+
+CREATE TABLE Vendeur(
+	Idv int NOT NULL ,
+	Nom varchar (26) NOT NULL,
+	Prenom varchar (26) NOT NULL,
+	Salaire int NOT NULL,
+	Lieu_travail varchar (40) NOT NULL,
+	PRIMARY KEY (Idv),
+	FOREIGN KEY (Lieu_travail) REFERENCES Concessionnaire(Adresse)
+);
+
+INSERT INTO Vendeur VALUES
+(85 ,'Durand'	,'Dorian'	,1400,'10 rue generale de gaule, 91100'),
+(75 ,'Dupond'	,'Eloise'	,2100,'10 rue generale de gaule, 91100'),
+(250,'Martin'	,'Elise'	,2350,'10 rue generale de gaule, 91100'),
+
+(52 ,'Lefebvre'	,'William'	,1433,'50 rue Bejamin, 75014'),
+(13 ,'Leroy'	,'Heloise'	,2190,'50 rue Bejamin, 75014'),
+(55 ,'Roux'		,'Marion'	,1362,'50 rue Bejamin, 75014'),
+(46 ,'David'	,'Jean'		,2018,'50 rue Bejamin, 75014'),
+(136,'Morel'	,'Axelle'	,2116,'50 rue Bejamin, 75014'),
+
+(16 ,'Rousseau'	,'Arnaud'	,1902,'35 rue des fleuries, 92000'),
+(65 ,'Vincent'	,'Elsa'		,1879,'35 rue des fleuries, 92000'),
+(84 ,'Muller'	,'Gabin'	,2178,'35 rue des fleuries, 92000'),
+(32 ,'Lefevre'	,'Florian'	,1392,'35 rue des fleuries, 92000'),
+
+(300,'Boyer'	,'Leonie'	,2029,'23 rue gambetta, 77000'),
+(106,'Garnier'	,'Elisa'	,1800,'23 rue gambetta, 77000'),
+(280,'Chevalier','Guillaume',1992,'23 rue gambetta, 77000'),
+
+(22 ,'Moulin'	,'Aymeric'	,1390,'08 rue de Berry , 93120'),
+(26 ,'Dupuis'	,'Nina'		,2088,'08 rue de Berry , 93120'),
+(141,'Louis'	,'Rafael'	,2015,'08 rue de Berry , 93120'),
+(502,'Deschamps','Andrea'	,1508,'08 rue de Berry , 93120'),
+
+(301,'Vasseur'	,'Charles'	,1906,'15 rue Charles Paradinas, 92110'),
+(210,'Royer'	,'Marion'	,1830,'15 rue Charles Paradinas, 92110'),
+(480,'Klein'	,'Tristan'	,1826,'15 rue Charles Paradinas, 92110'),
+(230,'Jacquet'	,'Apollione',1895,'15 rue Charles Paradinas, 92110');
+
+
+CREATE TABLE Garagiste(
+	Idg int NOT NULL ,
+	Nom varchar (26) NOT NULL,
+	Prenom varchar (26) NOT NULL,
+	Salaire int NOT NULL,
+	Lieu_travail varchar (40) NOT NULL,
+	PRIMARY KEY (Idg),
+	FOREIGN KEY (Lieu_travail) REFERENCES Concessionnaire(Adresse)
+);
+
+INSERT INTO Garagiste VALUES
+(256,'Laporte'	 ,'Anthony'	 ,1787,'23 rue gambetta, 77000'),
+(69 ,'Pasquier'	 ,'Hugo'	 ,1779,'23 rue gambetta, 77000'),
+(137,'Calier'	 ,'Alan'	 ,1470,'23 rue gambetta, 77000'),
+(86 ,'Lamy'		 ,'Quentin'	 ,1735,'23 rue gambetta, 77000'),
+(186,'Delaunay'	 ,'Aaron'	 ,2090,'23 rue gambetta, 77000'),
+
+(47 ,'Pichon'	 ,'Alexis'	 ,1809,'10 rue generale de gaule, 91100'),
+(104,'Lejeune'	 ,'Ayoub'	 ,1451,'10 rue generale de gaule, 91100'),
+(136,'Barthelemy','Adrien'	 ,1591,'10 rue generale de gaule, 91100'),
+(150,'Perret'	 ,'Loic'	 ,1849,'10 rue generale de gaule, 91100'),
+
+(35 ,'Reynaud'	 ,'David'	 ,1475,'50 rue Bejamin, 75014'),
+(286,'Humbert'	 ,'Simon'	 ,1982,'50 rue Bejamin, 75014'),
+(176,'Marechal'	 ,'Kevin'	 ,1976,'50 rue Bejamin, 75014'),
+(52 ,'Bernard'	 ,'Corentin' ,1718,'50 rue Bejamin, 75014'),
+(45 ,'Lemaitre'	 ,'Tristan'	 ,2066,'50 rue Bejamin, 75014'),
+(141,'Gay'		 ,'Alan'	 ,1829,'50 rue Bejamin, 75014'),
+(248,'Bouchet'	 ,'Tony'	 ,1595,'50 rue Bejamin, 75014'),
+
+(276,'Tessier'	 ,'Kevin'	 ,1827,'35 rue des fleuries, 92000'),
+(244,'Da Silva'	 ,'Tiago'	 ,2036,'35 rue des fleuries, 92000'),
+(209,'Poulain'	 ,'Aurelien' ,1618,'35 rue des fleuries, 92000'),
+(263,'Grondin'	 ,'Lukas'	 ,1794,'35 rue des fleuries, 92000'),
+(175,'Etienne'	 ,'Thibaut'	 ,1974,'35 rue des fleuries, 92000'),
+
+(40 ,'Gillet'	 ,'Dylan'	 ,1678,'15 rue Charles Paradinas, 92110'),
+(258,'Guichard'	 ,'Alex'	 ,1913,'15 rue Charles Paradinas, 92110'),
+(59 ,'Defretas'	 ,'Alexandre',1736,'15 rue Charles Paradinas, 92110'),
+(272,'Michaud'	 ,'Aymeric'	 ,1700,'15 rue Charles Paradinas, 92110'),
+(101,'Boulanger' ,'Jeremy'	 ,1531,'15 rue Charles Paradinas, 92110'),
+
+(65 ,'Marchal'	 ,'Vincent'	 ,2012,'08 rue de Berry , 93120'),
+(127,'Besson'	 ,'Charles'	 ,1909,'08 rue de Berry , 93120'),
+(12 ,'Cousin'	 ,'Dorian'	 ,1933,'08 rue de Berry , 93120'),
+(21 ,'Le Goff'	 ,'Diego'    ,1969,'08 rue de Berry , 93120');
+
+CREATE TABLE Usine(
+	Idu int NOT NULL,
+	Nom varchar (26) NOT NULL,
+	Pays varchar (26) NOT NULL,
+	Region varchar (16),
+	PRIMARY KEY (Idu)
+);
+
+INSERT INTO Usine VALUES
+(250,'Usine PSA','FRANCE','Aulnay-sous-Bois'),
+(3250,'Usine PSA','ESPAGNE','Madrid'),
+(450,'Usine PSA','FRANCE','Metz'),
+(1005,'Usine PSA','FRANCE','Vesoul'),
+(4230,'Usine PSA','ARGENTINE','Buenos Aires'),
+
+(1061,'Usine Renault','FRANCE','Cléon'),
+(620,'Usine Renault', 'FRANCE','Alpine de Dieppe'),
+(8512,'Usine Renault','FRANCE','Flins'),
+(1320,'Usine Renault','PORTUGAL','Aveiro-CACIA'),
+(8130,'Usine Renault','ESAPGNE','Séville'),
+
+(1312,'Usine Ford','BELGIQUE','Genk'),
+(2520,'Usine Ford','ALLEMAGNE','Sarrelouis'),
+(5640,'Usine Ford','ESPAGNE','Valence'),
+
+(3005,'Usine Fiat','POLOGNE','Tychy'),
+(5120,'Usine Fiat','ITALIE','Cassino'),
+(6502,'Usine Fiat','ITALIE','Rivalta');
+
+
+CREATE TABLE Voiture(
+	Num_chassis char (17) NOT NULL ,
+	Modele varchar (26) NOT NULL,
+	Prix varchar (16) NOT NULL,
+	Energie enum ('Diesel','Electrique','Essence', 'GPL','Hybrid') default 'Diesel' NOT NULL,
+	Puissance varchar (10) NOT NULL,
+	Couleur varchar (12),
+	Boite_vitesse enum ('Automatique','Manuelle') default 'Manuelle' NOT NULL,
+	Nb_places int,
+	Emission_Co2 varchar (8),
+	Vendue int,
+	Reparer int,
+	Adresse_Entreposer varchar (40) NOT NULL,
+	Usine_assemblage int NOT NULL,
+	PRIMARY KEY (Num_chassis),
+	FOREIGN KEY (Vendue) REFERENCES Vendeur(Idv),
+	FOREIGN KEY (Reparer) REFERENCES Garagiste(Idg),
+	FOREIGN KEY (Adresse_Entreposer) REFERENCES Concessionnaire(Adresse),
+	FOREIGN KEY (Usine_assemblage) REFERENCES Usine(Idu)
+	);
+
+INSERT INTO Voiture VALUES
+('VF1R9800965014288','CLIO'					,'11 640€','Essence'   ,'75 Ch' ,'Blanc Glacier'   ,'Manuelle'   ,5,'137g/km',NULL,NULL,'50 rue Bejamin, 75014',1061),
+('VF1R9800064812166','CLIO'					,'12 100€','Essence'   ,'75 Ch' ,'Gris Titanium'   ,'Manuelle'   ,5,'137g/km',52,35,'50 rue Bejamin, 75014',1061),
+('VF1RJA00465365866','CLIO'					,'26 627€','Hybrid'    ,'90 Ch' ,'Rouge Flamme'    ,'Automatique',5,'99g/km' ,NULL,286,'50 rue Bejamin, 75014',1061),
+('VF1RJA00X65367105','CLIO'					,'26 865€','Hybrid'    ,'90 Ch' ,'Orange Valencia' ,'Automatique',5,'99g/km' ,NULL,NULL,'50 rue Bejamin, 75014',1061),
+('VF1RJA00366361754','CLIO'					,'26 215€','Hybrid'    ,'100 Ch','Bleu Celadon'    ,'Automatique',5,'98g/km' ,13,286,'50 rue Bejamin, 75014',1061),
+('VF1RJA00265784573','CLIO'					,'22 305€','Hybrid'    ,'90 Ch' ,'Gris Titanium'   ,'Automatique',5,'98g/km' ,NULL,NULL,'50 rue Bejamin, 75014',1061),
+('VF1AG000466737156','ZOE'				    ,'34 350€','Electrique','110 Ch','Violet Blueberry','Automatique',5,'0g/km'  ,NULL,NULL,'50 rue Bejamin, 75014',1061),
+('VF1AG000066728809','ZOE'                  ,'36 850€','Electrique','110 Ch','Bleu Celadon'    ,'Automatique',5,'0g/km'  ,55,176,'50 rue Bejamin, 75014',620),
+('VF1AH000366671728','ZOE'				    ,'26 300€','Electrique','81 Ch' ,'Gris Lunaire'    ,'Automatique',5,'0g/km'  ,NULL,NULL,'50 rue Bejamin, 75014',620),
+('VF1JL000866584289','NOUVEAU TRAFIC COMBI' ,'36 100€','Diesel'    ,'120 Ch','Blanc Glacier'   ,'Manuelle'   ,8,'189g/km',NULL,NULL,'50 rue Bejamin, 75014',620),
+('VF1RFE00564925392','KADJAR'				,'26 754€','Diesel'    ,'115 Ch','Rouge Flamme'    ,'Manuelle'   ,5,'136g/km',NULL,176,'50 rue Bejamin, 75014',620),
+('VF1RFE00265015404','KADJAR'				,'27 962€','Diesel'    ,'115 Ch','Bleu Cosmos'     ,'Manuelle'   ,5,'136g/km',NULL,52,'50 rue Bejamin, 75014',620),
+('VF1RFE00664917978','KADJAR'				,'34 295€','Diesel'    ,'115 Ch','Gris Highland'   ,'Automatique',5,'135g/km',NULL,45,'50 rue Bejamin, 75014',620),
+('VF1RFE00764888331','KADJAR'				,'26 076€','Diesel'    ,'115 Ch','Gris Titanium'   ,'Manuelle'   ,5,'132g/km',NULL,45,'50 rue Bejamin, 75014',620),
+('VF1RFA00064891807','SCENIC'				,'26 988€','Diesel'    ,'120 Ch','Gris Cassiopée'  ,'Manuelle'   ,5,'145g/km',NULL,NULL,'50 rue Bejamin, 75014',620),
+('VF1RFA00264890898','Grand SCENIC'			,'28 236€','Diesel'    ,'120 Ch','Gris Platine'    ,'Manuelle'   ,7,'148g/km',46,NULL,'50 rue Bejamin, 75014',8512),
+('VF1RFA00665018024','SCENIC'				,'26 988€','Diesel'    ,'120 Ch','Gris Platine'    ,'Automatique',5,'157g/km',136,176,'50 rue Bejamin, 75014',8512),
+('VF1RFA00764864930','SCENIC'				,'23 690€','Diesel'    ,'120 Ch','Gris Cassiopée'  ,'Manuelle'   ,5,'145g/km',NULL,NULL,'50 rue Bejamin, 75014',8512),
+('VF1AH000X64904273','TWINGO'				,'14 818€','Essence'   ,'95 Ch' ,'Blanc Quartz'    ,'Manuelle'   ,4,'122g/km',NULL,248,'50 rue Bejamin, 75014',8512),
+('VF1AH000364901814','TWINGO'				,'16 100€','Essence'   ,'95 Ch' ,'Blanc Cristal'   ,'Manuelle'   ,4,'121g/km',NULL,NULL,'50 rue Bejamin, 75014',8512),
+('VF1AH000264902100','TWINGO'				,'13 590€','Essence'   ,'75 Ch' ,'Jaune mango'     ,'Manuelle'   ,4,'121g/km',136,NULL,'50 rue Bejamin, 75014',8512),
+('VF1AH000366471089','TWINGO Electric'	    ,'24 393€','Electrique','81 Ch' ,'Jaune mango'     ,'Automatique',4,'0g/km'  ,NULL,248,'50 rue Bejamin, 75014',1320),
+('VF1AH000466005574','TWINGO Electric'	    ,'23 506€','Electrique','81 Ch' ,'Bleu Dragée'     ,'Automatique',4,'0g/km'  ,NULL,NULL,'50 rue Bejamin, 75014',1320),
+('VF1RFB00765010455','MEGANE Berline'		,'23 040€','Diesel'    ,'115 Ch','Gris Titanium'   ,'Automatique',5,'118g/km',NULL,NULL,'50 rue Bejamin, 75014',1320),
+('VF1RFB00864899885','MEGANE Berline'		,'22 074€','Diesel'    ,'115 Ch','Gris Platine'    ,'Manuelle'   ,5,'118g/km',46,NULL,'50 rue Bejamin, 75014',1320),
+('VF1RFB00264900240','MEGANE Estate'		,'24 026€','Diesel'    ,'115 Ch','Noir Etoilé'     ,'Manuelle'   ,5,'119g/km',NULL,NULL,'50 rue Bejamin, 75014',1320),
+('VF1RFB00365378020','MEGANE SOCIETE'		,'25 020€','Diesel'    ,'100 Ch','Gris Titanium'   ,'Manuelle'   ,2,'117g/km',NULL,248,'50 rue Bejamin, 75014',1320),
+('VF1RJB00264833721','CAPTUR'				,'22 990€','Diesel'    ,'141 Ch','Gris Highland'   ,'Manuelle'   ,4,'129g/km',52,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00865501311','CAPTUR'				,'24 200€','Essence'   ,'129 Ch','Gris Highland'   ,'Manuelle'   ,4,'145g/km',NULL,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00166190010','CAPTUR'				,'35 990€','Hybrid'	   ,'90 Ch' ,'Blanc Nacré'     ,'Automatique',5,'35g/km' ,NULL,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00565600975','CAPTUR'			    ,'24 048€','GPL'       ,'99 Ch' ,'Bleu Iron'       ,'Manuelle'   ,5,'128g/km',NULL,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00866276785','CAPTUR'			    ,'20 357€','GPL'       ,'99 Ch' ,'Rouge Flamme'    ,'Manuelle'   ,5,'124g/km',NULL,35,'50 rue Bejamin, 75014',8130),
+('VF1RJB00X66649082','CAPTUR'				,'25 370€','GPL'       ,'99 Ch' ,'Rouge Flamme'    ,'Manuelle'   ,5,'128g/km',NULL,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00665127328','CAPTUR'				,'35 390€','Hybrid'    ,'90 Ch' ,'Blanc Nacré'     ,'Automatique',5,'35g/km' ,NULL,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00566055337','CAPTUR'				,'35 850€','Hybrid'    ,'90 Ch' ,'Bleu Celadon'    ,'Automatique',5,'34g/km' ,NULL,NULL,'50 rue Bejamin, 75014',8130),
+('VF1RJB00066737297','CAPTUR'				,'34 338€','Hybrid'    ,'90 Ch' ,'Bleu Iron'       ,'Automatique',5,'34g/km' ,NULL,NULL,'50 rue Bejamin, 75014',8130),
+
+('VF3PSCFB7LR521035','108'					,'11 673€','Essence'   ,'72 Ch' ,'Rouge Scarlett'  ,'Manuelle'   ,4,'109g/km',NULL,175,'35 rue des fleuries, 92000',250),
+('VF3PSCFB7LR541820','108'					,'11 787€','Essence'   ,'72 Ch' ,'Antelope'		   ,'Manuelle'   ,4,'109g/km',16,276,'35 rue des fleuries, 92000',250),
+('VF3PSCFB7LR001523','108'					,'13 588€','Essence'   ,'72 Ch' ,'Gris Gallium'	   ,'Manuelle'   ,4,'109g/km',NULL,NULL,'35 rue des fleuries, 92000',250),
+('VR3UPHNKKL5005312','208'					,'21 227€','Essence'   ,'75 Ch' ,'Jaune Faro'      ,'Manuelle'   ,2,'124g/km',NULL,244,'35 rue des fleuries, 92000',250),
+('VR3UHZKXZLT511203','208'					,'36 477€','Electrique','136 Ch','Blanc Banquise'  ,'Automatique',2,'0g/km'  ,NULL,244,'35 rue des fleuries, 92000',250),
+('VR3UBYHYJLT522301','208'					,'22 568€','Essence'   ,'75 Ch' ,'Gris Artense'    ,'Manuelle'   ,5,'119g/km',84,NULL,'35 rue des fleuries, 92000',250),
+('VR3UHZKXZLT562331','208'					,'35 464€','Electrique','136 Ch','Rouge Elixir'    ,'Automatique',5,'0g/km'  ,NULL,244,'35 rue des fleuries, 92000',3250),
+('VR3UBYHYJLT151221','208'					,'24 165€','Diesel'    ,'75 Ch' ,'Blanc Banquise'  ,'Manuelle'   ,5,'109g/km',NULL,NULL,'35 rue des fleuries, 92000',3250),
+('VF3LRHNPJLS566482','308'					,'26 988€','Diesel'    ,'120 Ch','Bleu Vertigo'    ,'Manuelle'   ,5,'145g/km',32,209,'35 rue des fleuries, 92000',3250),
+('VF3LPHNSKLS003122','308'					,'26 988€','Diesel'    ,'120 Ch','Gris Platinium'  ,'Automatique',4,'145g/km',NULL,NULL,'35 rue des fleuries, 92000',3250),
+('VF3LPHNSKLS445120','308'					,'26 988€','Diesel'    ,'120 Ch','Rouge Ultimate'  ,'Automatique',5,'145g/km',NULL,263,'35 rue des fleuries, 92000',3250),
+('VF3LPHNSKLS458512','308'					,'26 988€','Diesel'    ,'120 Ch','Noir Perla Nera' ,'Manuelle'   ,5,'145g/km',NULL,263,'35 rue des fleuries, 92000',3250),
+('VF3LRHNPJLS983215','308'					,'26 448€','Essence'   ,'120 Ch','Gris Artense'    ,'Manuelle'   ,4,'133g/km',84,NULL,'35 rue des fleuries, 92000',3250),
+('VF3LRHNPJLS134852','308'					,'24 566€','Essence'   ,'120 Ch','Blanc Banquise'  ,'Manuelle'   ,5,'133g/km',NULL,NULL,'35 rue des fleuries, 92000',450),
+('VR3USHNSKLJ260471','SUV 2008'				,'27 735€','Essence'   ,'130 Ch','Orange Fusion'   ,'Manuelle'   ,5,'134g/km',NULL,209,'35 rue des fleuries, 92000',450),
+('VR3USHNKKLJ625130','SUV 2008'				,'22 806€','Essence'   ,'130 Ch','Blanc Banquise'  ,'Automatique',5,'134g/km',NULL,NULL,'35 rue des fleuries, 92000',450),
+('VR3USHNKKLJ784521','SUV 2008'				,'22 278€','Essence'   ,'100 Ch','Rouge Elixir'    ,'Manuelle'   ,5,'123g/km',NULL,NULL,'35 rue des fleuries, 92000',450),
+('VR3USHNSKLJ456800','SUV 2008'				,'25 587€','Diesel'    ,'100 Ch','Gris Artense'    ,'Manuelle'   ,5,'115g/km',NULL,NULL,'35 rue des fleuries, 92000',450),
+('VR3USHNSKLJ002154','SUV 2008'				,'25 673€','Diesel'    ,'100 Ch','Blanc Nacré'     ,'Manuelle'   ,5,'115g/km',NULL,NULL,'35 rue des fleuries, 92000',450),
+('VR3UKZKXZLJ002198','SUV 2008'				,'39 568€','Electrique','136 Ch','Bleu Vertigo'    ,'Automatique',5,'0g/km  ',65,NULL,'35 rue des fleuries, 92000',450),
+('VR3UKZKXZLJ201563','SUV 2008'				,'39 664€','Electrique','136 Ch','Noir Onyx'       ,'Automatique',5,'0g/km  ',NULL,175,'35 rue des fleuries, 92000',1005),
+('VR3UDYHYJLJ261154','SUV 2008'				,'25 673€','Essence'   ,'130 Ch','Orange Fusion'   ,'Automatique',5,'134g/km',NULL,175,'35 rue des fleuries, 92000',1005),
+('VR3UDYHYJLJ112034','SUV 2008'				,'28 214€','Essence'   ,'130 Ch','Gris Platinium'  ,'Automatique',5,'134g/km',16,NULL,'35 rue des fleuries, 92000',1005),
+('VF3MRHNSMLS115412','SUV 3008'				,'29 964€','Essence'   ,'130 Ch','Bleu Célèbes'    ,'Automatique',5,'146g/km',NULL,175,'35 rue des fleuries, 92000',1005),
+('VF3MRHNSMLS845681','SUV 3008'				,'29 354€','Essence'   ,'130 Ch','Noir Perla Nera' ,'Manuelle'   ,5,'140g/km',NULL,NULL,'35 rue des fleuries, 92000',1005),
+('VF3MRHNSULS265413','SUV 3008'				,'33 814€','Diesel'    ,'130 Ch','Gris Artense'    ,'Automatique',5,'136g/km',84,NULL,'35 rue des fleuries, 92000',1005),
+('VF3MCYHZRLS465123','SUV 3008'				,'35 800€','Diesel'    ,'130 Ch','Gris Platinium'  ,'Manuelle'   ,5,'130g/km',NULL,NULL,'35 rue des fleuries, 92000',4230),
+('VF3M45GBULS002647','SUV 3008'				,'56 559€','Hybrid'    ,'130 Ch','Rouge Ultimate'  ,'Automatique',5,'36g/km' ,NULL,209,'35 rue des fleuries, 92000',4230),
+('VF3M4DGZULS145510','SUV 3008'				,'45 868€','Hybrid'    ,'130 Ch','Nacrée Blanc'    ,'Automatique',5,'36g/km' ,NULL,NULL,'35 rue des fleuries, 92000',4230),
+('VF3M4DGZULS445471','SUV 3008'				,'45 868€','Hybrid'    ,'130 Ch','Bleu Vertigo'    ,'Automatique',5,'36g/km' ,NULL,NULL,'35 rue des fleuries, 92000',4230),
+('VR3F45GFTLY261845','508'					,'40 933€','Essence'   ,'130 Ch','Noir Perla Nera' ,'Manuelle'   ,5,'136g/km',65,NULL,'35 rue des fleuries, 92000',4230),
+('VR3FCYHZJLY016658','508'					,'34 155€','Diesel'    ,'130 Ch','Gris Artense'    ,'Automatique',5,'123g/km',NULL,209,'35 rue des fleuries, 92000',4230),
+('VR3F45GFTKY154621','508'					,'37 896€','Essence'   ,'133 Ch','Dark Blue'	   ,'Automatique',5,'147g/km',NULL,NULL,'35 rue des fleuries, 92000',4230),
+('VR3F4DGZTLY955210','508'					,'48 284€','Hybrid'    ,'120 Ch','Bleu Célèbes'    ,'Automatique',5,'55g/km' ,65,209,'35 rue des fleuries, 92000',4230),
+('VR3F4DGZTKY560218','508'					,'52 565€','Hybrid'    ,'120 Ch','Gris Platinium'  ,'Automatique',5,'45g/km' ,NULL,NULL,'35 rue des fleuries, 92000',4230),
+('VR3FCYHZRLY395412','508'					,'42 174€','Diesel'    ,'120 Ch','Blanc Nacré'     ,'Automatique',5,'128g/km',NULL,NULL,'35 rue des fleuries, 92000',4230),
+
+('UU1VDGSA6399E1123','SANDERO'				,'11 590€','GPL'	   ,'70 Ch' ,'Bleu Ion'		   ,'Manuelle'   ,5,'115g/km',85,47,'10 Rue Generale de Gaule, 91100',1061),
+('UU1B5220466201374','SANDERO'				,'9 990€' ,'Essence'   ,'73 Ch' ,'Gris Highland'   ,'Manuelle'   ,5,'115g/km',85,NULL,'10 Rue Generale de Gaule, 91100',1061),
+('UU1VO920017031654','SANDERO'				,'13 190€','Diesel'    ,'90 Ch' ,'Rouge Fusion'    ,'Automatique',5,'129g/km',NULL,104,'10 Rue Generale de Gaule, 91100',1061),
+('UU1KP234255922035','SANDERO'				,'42 174€','Diesel'    ,'90 Ch' ,'Bleu Navy'	   ,'Manuelle'   ,5,'129g/km',NULL,104,'10 Rue Generale de Gaule, 91100',1061),
+('UU1B5220466411487','SANDERO'				,'8 356€' ,'Essence'   ,'75 Ch' ,'Brun Vison'      ,'Manuelle'   ,5,'115g/km',75,NULL,'10 Rue Generale de Gaule, 91100',620),
+('UU1JHN45620523052','SANDERO STEPWAY'		,'14 888€','GPL'	   ,'90 Ch' ,'Blanc Glacier'   ,'Manuelle'   ,5,'115g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',620),
+('UU1KODNQ394354827','SANDERO STEPWAY'		,'14 390€','Essence'   ,'73 Ch' ,'Bleu Iron'	   ,'Manuelle'   ,5,'120g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',620),
+('UU1MQOCN597413151','SANDERO STEPWAY'		,'13 990€','GPL'	   ,'90 Ch' ,'Gris Comète'     ,'Automatique',5,'109g/km',250,150,'10 Rue Generale de Gaule, 91100',620),
+('UU1MQPPL565420408','SANDERO STEPWAY'		,'11 990€','Disele'    ,'73 Ch' ,'Orange Atacama'  ,'Automatique',5,'127g/km',NULL,150,'10 Rue Generale de Gaule, 91100',8512),
+('UU1PQMHVNF5698713','SANDERO STEPWAY'		,'14 000€','Essence'   ,'73 Ch' ,'Noir Nacré'      ,'Manuelle'   ,5,'125g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',8512),
+('UU1HJD20866471452','DUSTER'				,'12 490€','GPL'       ,'100 Ch','Blanc Nacré'     ,'Manuelle'   ,5,'126g/km',NULL,150,'10 Rue Generale de Gaule, 91100',8512),
+('UU1HJD20966111817','DUSTER'				,'12 730€','Essence'   ,'100 Ch','Bleu Iron'       ,'Manuelle'   ,5,'140g/km',NULL,150,'10 Rue Generale de Gaule, 91100',8512),
+('UU1HJD20816840417','DUSTER'				,'7 470€' ,'Diesel'    ,'90 Ch' ,'Rouge Fusion'    ,'Manuelle'   ,5,'130g/km',250,136,'10 Rue Generale de Gaule, 91100',1320),
+('UU1HJD20816842682','DUSTER'				,'13 500€','Essence'   ,'125 Ch','Gris Comète'     ,'Manuelle'   ,5,'138g/km',250,NULL,'10 Rue Generale de Gaule, 91100',1320),
+('UU1HJD20906516456','DUSTER'				,'19 300€','Diesel'    ,'115 Ch','Gris Highland'   ,'Manuelle'   ,5,'128g/km',250,136,'10 Rue Generale de Gaule, 91100',1320),
+('UU1J9220766410964','LODGY'				,'10 850€','GPL'       ,'100 Ch','Gris Highland'   ,'Manuelle'   ,5,'108g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',1320),
+('UU1J9220166672303','LODGY'				,'14 450€','Essence'   ,'104 Ch','Bleu Navy'	   ,'Manuelle'   ,5,'138g/km',75,NULL,'10 Rue Generale de Gaule, 91100',1320),
+('UU1J9220765416820','LODGY'				,'14 500€','Essence'   ,'110 Ch','Gris Highland'   ,'Manuelle'   ,7,'128g/km',75,47,'10 Rue Generale de Gaule, 91100',8130),
+('UU1J9220795610231','LODGY'				,'14 900€','Diesel'    ,'116 Ch','Gris Highland'   ,'Manuelle'   ,7,'108g/km',NULL,47,'10 Rue Generale de Gaule, 91100',8130),
+('UU1J9220700325147','LODGY'				,'11 460€','GPL'       ,'115 Ch','Gris Highland'   ,'Manuelle'   ,7,'138g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',8130),
+('UU1J9220711540354','LODGY'				,'17 990€','Diesel'    ,'110 Ch','Gris Highland'   ,'Manuelle'   ,5,'105g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',8130),
+('UU1J9220796451230','LODGY'				,'17 390€','Diesel'    ,'116 Ch','Gris Highland'   ,'Manuelle'   ,7,'109g/km',NULL,NULL,'10 Rue Generale de Gaule, 91100',8130),
+
+('VF7F923993844K395','Ë-C4'					,'35 600€','Electrique','90 Ch'	,'Bleu Iceland'   ,'Automatique',5,'0g/km'	,300,NULL,'23 rue gambetta, 77000',250),
+('VF7N8F43O94590554','C4'					,'20 900€','Diesel'    ,'100 Ch','Gris Platinium' ,'Manuelle'   ,5,'109g/km',NULL,256,'23 rue gambetta, 77000',250),
+('VF732F42893434JF9','C5'					,'39 950€','Hybrid'    ,'120 Ch','Rouge Elixir'   ,'Automatique',7,'55g/km'	,106,NULL,'23 rue gambetta, 77000',250),
+('VF7F3O92J43IO2943','C3'					,'15 300€','Diesel'    ,'85 Ch'	,'Brun Caramel'   ,'Manuelle'   ,5,'115/km'	,NULL,69,'23 rue gambetta, 77000',3250),
+('VF7439FJ3OI2JF334','C1'					,'11 350€','Diesel'    ,'103 Ch','Blanc Banquise' ,'Manuelle'   ,2,'115/km'	,280,137,'23 rue gambetta, 77000',450),
+('VF7EJR933209849F3','C5'					,'35 150€','Hybrid'    ,'120 Ch','Gris Acier'     ,'Automatique',7,'119g/km',NULL,137,'23 rue gambetta, 77000',1005),
+('VF7FRP92340F93482','Ë-C4'					,'36 390€','Electrique','115 Ch','Noir Obsidien'  ,'Manuelle'   ,5,'0g/km'	,NULL,NULL,'23 rue gambetta, 77000',4230),
+('VF7FUHE8923409244','C1'					,'10 300€','Diesel'    ,'116 Ch','Bleu Iceland'   ,'Manuelle'   ,2,'109g/km',NULL,NULL,'23 rue gambetta, 77000',3250),
+('VF7FNI328H4399843','C3'					,'13 510€','Diesel'    ,'117 Ch','Gris Acier'     ,'Manuelle'   ,5,'120/km'	,NULL,NULL,'23 rue gambetta, 77000',1005),
+('VF78H3FJ3NDFHU384','C3'					,'16 550€','Diesel'    ,'95 Ch'	,'Noir Obsidien'  ,'Manuelle'   ,5,'116/km'	,106,86,'23 rue gambetta, 77000',450),
+('VF78H389FHEI83I49','C5'					,'25 120€','Essence'   ,'95 Ch'	,'Noir Obsidien'  ,'Manuelle'   ,5,'102/km'	,106,NULL,'23 rue gambetta, 77000',450),
+('VF7FN38HFN8398347','C5'					,'24 840€','Essence'   ,'116 Ch','Blanc Banquise' ,'Manuelle'   ,5,'107/km'	,NULL,186,'23 rue gambetta, 77000',1005),
+('VF738FN7JDFN83JFF','Ë-C4'					,'37 330€','Electrique','120 Ch','Rouge Elixir'   ,'Automatique',5,'0g/km'	,NULL,186,'23 rue gambetta, 77000',3250),
+('VF7NUF73NF3782738','C5'					,'26 150€','Essence'   ,'100 Ch','Brun Caramel'   ,'Manuelle'   ,5,'107/km'	,300,186,'23 rue gambetta, 77000',1005),
+('VF7FIFNUE732NVDIR','C1'					,'10 160€','Diesel'    ,'102 Ch','Gris Platinium' ,'Manuelle'   ,2,'114/km'	,NULL,NULL,'23 rue gambetta, 77000',450),
+('VF79FKENV93489242','C3'					,'14 740€','Diesel'    ,'100 Ch','Rouge Elixir'   ,'Manuelle'   ,5,'119/km'	,300,69,'23 rue gambetta, 77000',4230),
+('VF7ZOF83849834845','C1'					,'9 200€' ,'Diesel'    ,'90 Ch'	,'Noir Obsidien'  ,'Manuelle'   ,2,'120/km'	,NULL,NULL,'23 rue gambetta, 77000',3250),
+
+('ZFA897453N8F934NF','FIAT 500x'			,'22 090€','Essence'    ,'69 Ch','Blanc Bossanova'  ,'Manuelle'   ,5,'119g/km',22,65,'08 rue de Berry , 93120' ,3005),
+('ZFA8H2384Y82H8DF8','FIAT TIPO'			,'17 390€','Disesel'    ,'70 Ch','Rouge Corail'	    ,'Manuelle'   ,5,'138g/km',NULL,NULL,'08 rue de Berry , 93120' ,5120),
+('ZFA18726Y4897HF89','FIAT TIPO CROSS'		,'17 390€','Essence'    ,'69 Ch','Vert Menthe'		,'Automatique',5,'135g/km',NULL,12,'08 rue de Berry , 93120' ,6502),
+('ZFARNEI830928432Z','FIAT 500c'			,'18 090€','Hybrid'     ,'70 Ch','Rouge Pasodoble'  ,'Manuelle'	  ,5,'118g/km',26,127,'08 rue de Berry , 93120' ,3005),
+('ZFAUIHD89R2839423','FIAT PANDA'			,'9 990€' ,'Essence'    ,'69 Ch','Gris Tech-House'  ,'Automatique',5,'136g/km',NULL,12,'08 rue de Berry , 93120' ,3005),
+('ZFAD8FOI239DN3874','FIAT 500'				,'18 090€','Essence'    ,'70 Ch','Noir Crossover'   ,'Manuelle'   ,5,'137g/km',141,NULL,'08 rue de Berry , 93120' ,5120),
+('ZFANIER8923950422','FIAT 500'				,'15 290€','Hybrid'     ,'69 Ch','Gris Electroclash','Manuelle'   ,5,'111g/km',141,NULL,'08 rue de Berry , 93120' ,6502),
+('ZFA09328JR488F449','FIAT 500'				,'16 790€','Disel'	    ,'69 Ch','Gris Metal'		,'Automatique',5,'108g/km',NULL,21,'08 rue de Berry , 93120' ,6502),
+('ZFAFOIE3890438H83','FIAT 500'				,'17 290€','Essence'    ,'70 Ch','Bordeaux Opera'   ,'Manuelle'   ,5,'112g/km',502,21,'08 rue de Berry , 93120' ,3005),
+('ZFA0DUG7739876G78','FIAT 500'				,'20 290€','GPL'	    ,'70 Ch','Bleu Epic'		,'Automatique',5,'130g/km',NULL,65,'08 rue de Berry , 93120' ,5120),
+
+('WF0JF902384JDF894','PUMA'					,'20 800€','Hybrid'    ,'116 Ch','Bleu Abysse'		,'Automatique',5,'155g/km',NULL,40,'15 rue Charles Paradinas, 92110',1312),
+('WF0FK9023IU4923JD','KUGA'					,'23 000€','Hybrid'    ,'120 Ch','Rouge Racing'		,'Automatique',5,'116g/km',301,NULL,'15 rue Charles Paradinas, 92110',2520),
+('WF0F92U349329RR34','FIESTA'				,'10 600€','Hybrid'    ,'116 Ch','Blanc Glacier'	,'Manuelle'   ,5,'120g/km',NULL,40,'15 rue Charles Paradinas, 92110',5640),
+('WF0FJ920834OK2903','FOCUS'				,'24 500€','Hybrid'    ,'116 Ch','Noir Agate'		,'Automatique',5,'114g/km',NULL,NULL,'15 rue Charles Paradinas, 92110',2520),
+('WF0J2903U49320304','MUSTANG'				,'48 990€','Electrique','116 Ch','Gris Solar'		,'Automatique',5,'0g/km'  ,210,258,'15 rue Charles Paradinas, 92110',2520),
+('WF0DN823Y498328US','MUSTANG'				,'49 900€','Diesel'    ,'116 Ch','Gris Matter'		,'Manuelle'   ,5,'109g/km',NULL,258,'15 rue Charles Paradinas, 92110',5640),
+('WF0EFSHI83Y4IU2H4','GALAXY'				,'38 050€','Essence'   ,'116 Ch','Gris Magnetic'	,'Manuelle'   ,5,'119g/km',NULL,NULL,'15 rue Charles Paradinas, 92110',5640),
+('WF0893YD2H8347823','PUMA'					,'23 200€','Diesel'    ,'116 Ch','Blanc Metropolis' ,'Manuelle'   ,5,'150g/km',480,59,'15 rue Charles Paradinas, 92110',5640),
+('WF0CNO9U390RNIEZJ','KUGA'					,'26 450€','Essence'   ,'120 Ch','Bleu Island'		,'Manuelle'   ,5,'135g/km',NULL,59,'15 rue Charles Paradinas, 92110',2520),
+('WF0J38H4283479283','KUGA'					,'24 500€','Diesel'    ,'120 Ch','Rouge Fantastic'  ,'Manuelle'   ,5,'144g/km',NULL,101,'15 rue Charles Paradinas, 92110',5640),
+('WF0F392J3R239D234','MUSTANG'				,'51 000€','Diesel'    ,'116 Ch','Rouge Racing'		,'Automatique',5,'110g/km',NULL,NULL,'15 rue Charles Paradinas, 92110',2520),
+('WF0F3J289Y4N23983','FIESTA'				,'14 000€','Essence'   ,'116 Ch','Blanc Glacier'	,'Manuelle'   ,5,'125g/km',NULL,258,'15 rue Charles Paradinas, 92110',5640),
+('WF08HFUI29834H8E9','FOCUS'				,'23 150€','Essence'   ,'116 Ch','Blanc Metropolis','Automatique' ,5,'123g/km',230,NULL,'15 rue Charles Paradinas, 92110',5640),
+('WF09F2H3OI24U392E','KUGA'					,'25 120€','Essence'   ,'116 Ch','Gris Solar'		,'Manuelle'   ,5,'111g/km',NULL,NULL,'15 rue Charles Paradinas, 92110',5640),
+('WF0INF8932H4N2OI9','GALAXY'				,'38 900€','Diesel'    ,'116 Ch','Bleu Abysse'		,'Automatique',5,'130g/km',230,272,'15 rue Charles Paradinas, 92110',5640),
+('WF0IHF980E38N8590','PUMA'					,'21 200€','Diesel'    ,'116 Ch','Gris Matter'		,'Manuelle'   ,5,'136g/km',301,272,'15 rue Charles Paradinas, 92110',5640),
+('WF0DIH8H9784B7848','FORD GT'				,'1 000 000€','Essence'    ,'660 Ch','Noir Agate'   ,'Manuelle'   ,2,'160g/km',NULL,NULL,'15 rue Charles Paradinas, 92110',5640);
+
+CREATE TABLE Piece(
+	Idp int NOT NULL,
+	Zones varchar (17) NOT NULL,
+	Nom varchar (24) NOT NULL,
+	Prix varchar (6),
+	Possession_Voiture char (17),
+	PRIMARY KEY (Idp),
+	FOREIGN KEY (Possession_Voiture) REFERENCES Voiture(Num_chassis)
+);
+
+
+INSERT INTO Piece VALUES
+(20,'Moteur','Embrayage','700€','WF0INF8932H4N2OI9'),
+(60,'Moteur','Culasse','1500€','WF0INF8932H4N2OI9'),
+(56,'Moteur','Turbo','600€','WF0INF8932H4N2OI9'),
+(80,'Moteur','Filtre à air','16 000€','WF0INF8932H4N2OI9'),
+
+(120,'Echappement','Silencieux','209€','WF0INF8932H4N2OI9'),
+(645,'Echappement','Pot catalytique','1000€','WF0INF8932H4N2OI9'),
+
+(84,'Train Roulant','Rotules','60€','WF0INF8932H4N2OI9'),
+(0,'Train Roulant','Cadrans','376€','WF0INF8932H4N2OI9'),
+(18,'Train Roulant','4 Pneus','250€','WF0INF8932H4N2OI9'),
+(14,'Train Roulant','Roulements','32€','WF0INF8932H4N2OI9'),
+
+(45,'Éclairage','Optique ','120€','WF0INF8932H4N2OI9'),
+(9,'Éclairage','Ampoule','10€','WF0INF8932H4N2OI9'),
+(29,'Éclairage','Verre de phare','55€','WF0INF8932H4N2OI9'),
+
+(48,'Climatisation','Compresseur ','350€','WF0INF8932H4N2OI9'),
+(76,'Climatisation','Filtre d habitacle','50€','WF0INF8932H4N2OI9'),
+
+(38,'Chauffage/ventilation','Radiateur ','320€','WF0INF8932H4N2OI9'),
+(31,'Chauffage/ventilation','thermostat','70€','WF0INF8932H4N2OI9'),
+
+(7,'Freinage','Tamboure','221€','WF0INF8932H4N2OI9'),
+(11,'Freinage','mâchoire','27€','WF0INF8932H4N2OI9'),
+(19,'Freinage','câble de frein','30€','WF0INF8932H4N2OI9'),
+
+(150,'Direction','Rotule de direction ','70€','WF0INF8932H4N2OI9'),
+(340,'Direction','bras de suspension','30€','WF0INF8932H4N2OI9'),
+(151,'Direction','barre stabilisatrice','32€','WF0INF8932H4N2OI9'),
+
+(812,'Carrosserie','Pare-choc avant','150€','WF0INF8932H4N2OI9'),
+(216,'Carrosserie','pare-choc arrière','130€','WF0INF8932H4N2OI9'),
+(651,'Carrosserie','rétroviseurs','65€','WF0INF8932H4N2OI9'),
+(412,'Carrosserie','capot','80€','WF0INF8932H4N2OI9'),
+(585,'Carrosserie','hayon','150€','WF0INF8932H4N2OI9'),
+(22,'Carrosserie','ailes','37€','WF0INF8932H4N2OI9');
+
+CREATE TABLE Client(
+	Num_assurance char (10) NOT NULL,
+	Nom varchar (26) NOT NULL,
+	Prenom varchar (26) NOT NULL,
+	Adresse varchar (40) NOT NULL,
+	Num_tel char (14) NOT NULL,
+	PRIMARY KEY(Num_assurance),
+	UNIQUE(num_tel)
+);
+
+INSERT INTO Client VALUES
+('252SC45621','Gaillard'	,'Capucine'		,'9 Boulevard de la Chapelle, 75010'	,'06 51 62 95 11'),
+('56QJSPD201','Leroux'		,'Yasmine'		,'13 Rue Tiphainee, 75015'				,'06 62 84 42 20'),
+('93JD15Q121','Calin'		,'Masimilian'	,'29 Rue Singer, 75016'					,'06 80 51 36 84'),
+('20SDF63DD0','Vical'		,'Leo'			,'6 Avenue de Montespan, 75116'			,'06 15 20 37 67'),
+('65DFKQ2345','Olivier'		,'Mattis'		,'32 Avenue Foch, 75116'				,'06 50 75 41 31'),
+('4632FSFV32','Bourgeois'	,'Marion'		,'17 Boulevard de la Somme, 75017'		,'06 02 94 28 50'),
+('452DFC0248','Dupuy'		,'Martin'		,'64 Allée Darius Milhaud, 75019 '		,'06 71 85 19 02'),
+('30FSJVV203','Carpentier'	,'Manu'			,'141 Rue de Lourmel, 75015'			,'06 50 14 64 07'),
+
+('50DBNCI500','Sanchez'		,'Barnabe'		,'8 Rue Voltaire, 92000'				,'06 85 33 95 10'),
+('642DNCU133','Louis'		,'Rose'			,'93 Cours Nicole Dreyfus, 92000'		,'06 10 34 52 16'),
+('802IOHV520','Moulin'		,'Henri'		,'13 Rue des Fondrières, 92000'			,'06 96 54 10 18'),
+('55DOIQ2450','Huet'		,'Morgane'		,'393 Avenue de la République, 92000'	,'06 40 84 49 20'),
+('302DDQJ584','Boucher'		,'Evan'			,'61 Rue Salvador Allende, 92000'		,'06 29 71 32 70'),
+('6102CISN56','Carre'		,'Zelia'		,'15 Rue Joseph Terneau, 92000'			,'06 54 20 64 81'),
+('DCOI562101','Le Gall'		,'Florian'		,'5 Passage des Suisses, 92000'			,'06 66 94 81 30'),
+('5413SOCIS0','Collet'		,'Enrico'		,'4 Rue Noël Pons, 92000'				,'06 12 15 50 70'),
+('15QIOCX320','Cousin'		,'Justine'		,'200 Avenue de la République, 92000'	,'06 21 20 64 44'),
+
+('032DCIU230','Germain'		,'Killian'		,'31 Rue d Angoulême, 91100'			,'06 47 50 33 02'),
+('95COPW0451','Breton'		,'Evan'			,'33 Rue Louis Hesselin, 91100'			,'06 95 74 55 91'),
+('5032DIUH21','Langlois'	,'Esteban'		,'70 Rue Oberkampf, 91100'				,'06 10 73 48 99'),
+('6921DUIHQ0','Remy'		,'Apolline'		,'44 Rue de la Dauphiné, 91100 '		,'06 50 61 11 61'),
+('QCDF1320DA','Etienne'		,'Nathan'		,'101 Rue de Gournay, 91100'			,'06 45 50 02 65'),
+('APO561KS03','Tessier'		,'Amandine'		,'66 Rue du Bas Coudray, 91100'			,'06 84 74 09 68'),
+('2015DKJHQ0','Poulain'		,'Alexia'		,'12 Rue des Petites Granges, 91100'	,'06 75 01 94 30'),
+('9513DIHQ32','Delaunay'	,'Eleonore'		,'26 Rue Georges le du, 91100'			,'06 96 09 19 74'),
+('4602SDIUH5','Lambert'		,'Robin'		,'1 Rue Jean Kuttler,91100'				,'06 14 25 75 50'),
+
+('841FSKV401','Perrin'		,'Coralie'		,'26 Rue des Grâces,77000'				,'06 53 65 64 75'),
+('51F120CFS8','Morin'		,'Eugenie'		,'11 Rue Bouton Gaillard,77000'			,'06 20 42 85 16'),
+('610DIQS201','Clement'		,'Pierre'		,'21 Rue des Mezereaux,77000'			,'06 48 62 08 20'),
+('00D8LKSNVD','Roussel'		,'Hans'			,'39 Rue de la Baste,77000'				,'06 52 06 47 70'),
+('98SNV8SNNQ','Gautier'		,'Ulric'		,'7 Rue des Mezees,77000'				,'06 10 95 13 85'),
+('7SNOIC8QND','Duval'		,'Manon'		,'152 Rue des Belles Vues,77000'		,'06 56 73 90 70'),
+('89732NDHQN','Denis'		,'Anouck'		,'271 Rue des Vaux Luisants,77000'		,'06 01 43 42 16'),
+
+('28DNQJN82N','Dumont'		,'Paul'			,'99 Avenue de la République,93120'		,'06 73 27 70 18'),
+('9Q0NC82HSJ','Marchant'	,'Ghislaine'	,'16 Rue Robespierre,93120'				,'06 95 15 80 17'),
+('827DN8SUSZ','Boucher'		,'Tonio'		,'5 Rue Louise Michel,93120'			,'06 43 67 95 08'),
+('287DN982N8','Boulanger'	,'Nicolas'		,'14B Avenue Henri Barbusse,93120'		,'06 87 48 46 07'),
+('190DNU83NS','Legrand'		,'Victoire'		,'20 Rue Guilletat,93120'				,'06 12 50 47 17'),
+
+('29HDUN9JUS','Lefevre'		,'Tiago'		,'9 Rue des Teinturiers,92110'			,'06 08 80 15 45'),
+('91NDI8NJD8','Mercier'		,'Emil'			,'11 Rue Pierre Bérégovoy,92110'		,'06 54 76 80 03'),
+('39JD98NUDZ','Vincent'		,'Octavie'		,'111 Rue de Paris,92110'				,'06 14 90 77 19'),
+('378DNIUS8Z','Nicolas'		,'Paul'			,'16 Villa Emile,92110'					,'06 65 46 66 17'),
+('289DNJA83J','Blanc'		,'Samuel'		,'27 Rue de Neuilly,92110'				,'06 26 20 17 50'),
+('389HDUJI2H','Guerin'		,'Carla'		,'41 Boulevard Jean Jaurès,92110'		,'06 84 67 80 07'),
+('28HDNJSUZU','Mathieur'	,'Lukas'		,'21 Rue d Alsace,92110'				,'06 25 70 75 19');
+
+CREATE TABLE Acheter(
+	Num_chassis char (17) NOT NULL,
+	Date varchar  (30) NOT NULL,
+	Num_client char (10) NOT NULL,
+	Plaque_immatriculation char (9) NOT NULL,
+	PRIMARY KEY (Plaque_immatriculation),
+	FOREIGN KEY (Num_chassis) REFERENCES Voiture(Num_chassis),
+	FOREIGN KEY (Num_client) REFERENCES Client(Num_assurance)
+);
+
+INSERT INTO Acheter VALUES
+('UU1VDGSA6399E1123','15 juin 2018'		,'032DCIU230','HB-451-FD'),
+('UU1B5220466201374','06 aout 2047'		,'95COPW0451','FC-812-ZF'),
+('UU1B5220466411487','14 novembre 2019'	,'5032DIUH21','CK-032-ZB'),
+('UU1MQOCN597413151','02 janvier 2020'	,'6921DUIHQ0','BH-195-KH'),
+('UU1HJD20816840417','08 octobre 2019'	,'QCDF1320DA','AD-720-EV'),
+('UU1HJD20816842682','19 juillet 2017'	,'APO561KS03','BF-460-PJ'),
+('UU1HJD20906516456','17 aout 2017'		,'2015DKJHQ0','QC-942-SZ'),
+('UU1J9220166672303','11 septembre 2018','9513DIHQ32','JT-432-AB'),
+('UU1J9220765416820','10 decembre 2018'	,'4602SDIUH5','XH-948-FE'),
+
+('ZFA897453N8F934NF','20 mars 2019'		,'28DNQJN82N','RD-743-AG'),
+('ZFARNEI830928432Z','13 mai 2017'		,'9Q0NC82HSJ','BF-127-GD'),
+('ZFAD8FOI239DN3874','12 avril 2018'	,'827DN8SUSZ','AD-356-HZ'),
+('ZFANIER8923950422','15 juin 2019'		,'287DN982N8','HB-713-FZ'),
+('ZFAFOIE3890438H83','14 septembre 2020','190DNU83NS','XT-935-SG'),
+
+('VF7F923993844K395','04 december 2019'	,'841FSKV401','ED-158-JS'),
+('VF732F42893434JF9','07 janvier 2017'	,'51F120CFS8','QC-109-CE'),
+('VF7439FJ3OI2JF334','08 juin 2019'		,'610DIQS201','VA-198-OF'),
+('VF78H3FJ3NDFHU384','24 octobre 2018'	,'00D8LKSNVD','XC-143-DQ'),
+('VF78H389FHEI83I49','25 aout 2020'		,'98SNV8SNNQ','VR-867-FD'),
+('VF7NUF73NF3782738','28 avril 2019'	,'7SNOIC8QND','HD-457-VA'),
+('VF79FKENV93489242','23 janvier 2020'	,'89732NDHQN','AZ-835-TD'),
+
+('VF3PSCFB7LR541820','24 mars 2017'		,'50DBNCI500','ZD-514-FA'),
+('VR3UBYHYJLT522301','17 mai 2020'		,'642DNCU133','XS-354-SQ'),
+('VF3LRHNPJLS566482','19 juillet 2019'	,'802IOHV520','XQ-812-DQ'),
+('VF3LRHNPJLS983215','16 novembre 2017'	,'55DOIQ2450','XF-402-IK'),
+('VR3UKZKXZLJ002198','24 decembre 2019'	,'302DDQJ584','UO-754-HB'),
+('VR3UDYHYJLJ112034','20 avril 2020'	,'6102CISN56','JN-632-KR'),
+('VF3MRHNSULS265413','05 decembre 2018'	,'DCOI562101','HG-812-GZ'),
+('VR3F45GFTLY261845','01 septembre 2020','5413SOCIS0','PZ-023-MG'),
+('VR3F4DGZTLY955210','07 decembre 2019'	,'15QIOCX320','DF-084-FZ'),
+
+('VF1R9800064812166','09 juillet 2020'	,'252SC45621','LO-715-IN'),
+('VF1RJA00366361754','19 juin 2020'		,'56QJSPD201'		,'DA-641-FZ'),
+('VF1AG000066728809','14 septembre 2019','93JD15Q121'			,'PQ-120-AD'),
+('VF1RFA00264890898','13 juillet 2018'	,'20SDF63DD0'		,'CI-136-FQ'),
+('VF1RFA00665018024','27 juin 2020'		,'65DFKQ2345'			,'SM-345-JH'),
+('VF1AH000264902100','28 septembre 2019','4632FSFV32'		,'LA-851-ER'),
+('VF1RFB00864899885','20 mai 2019'		,'452DFC0248'		,'XI-942-JF'),
+('VF1RJB00264833721','22 avril 2018'	,'30FSJVV203'			,'ZB-124-AD'),
+
+('WF0FK9023IU4923JD','27 mars 2020'		,'29HDUN9JUS','AP-945-AS'),
+('WF0J2903U49320304','04 septembre 2017','91NDI8NJD8'		,'ZV-745-CZ'),
+('WF0893YD2H8347823','17 juin 2018'		,'39JD98NUDZ'		,'XE-614-FA'),
+('WF0INF8932H4N2OI9','16 mai 2020'		,'378DNIUS8Z'			,'SQ-852-QG'),
+('WF08HFUI29834H8E9','19 mars 2019'		,'289DNJA83J'			,'OQ-369-HR'),
+('WF0J38H4283479283','05 avril 2019'	,'389HDUJI2H'		,'XA-471-AD'),
+('WF0IHF980E38N8590','17 septembre 2018','28HDNJSUZU'		,'PQ-732-GR');
+
+
+CREATE TABLE Employer(
+	Ide int NOT NULL,
+	Nom varchar (26) NOT NULL,
+	Prenom varchar (26) NOT NULL,
+	Salaire int NOT NULL,
+	Emploi varchar (12) NOT NULL,
+	Lieu_travail int NOT NULL,
+	PRIMARY KEY (Ide),
+	FOREIGN KEY (Lieu_travail) REFERENCES Usine(idu)
+);
+
+INSERT INTO Employer VALUES
+(12,'Brenier','Bruno',1200,'Monteur',250),
+(55,'Clemence','Mathieu',1651,'Ouvrier',250),
+(27,'Garreau','Élise',1563,'Opérateur',250),
+(03,'Harquin','Denis',1414,'Opérateur',250),
+(65,'Fluet','Maurice',1534,'Monteur',250),
+(16,'Chalut','Audrey',1463,'Ouvrier',250),
+(42,'Nadeau','Marine',1249,'Ouvrier',250),
+
+(33,'Legault','Claudette',1249,'Monteur',3250),
+(84,'Clavette','Damien',1529,'Monteur',3250),
+(46,'Lamart','Victor',1269,'Opérateur',3250),
+(78,'Gauthier','Pascal',1227,'Ouvrier',3250),
+(07,'Henry','Camille',1457,'Ouvrier',3250),
+(63,'Desnoyers','Sabine',1676,'Ouvrier',3250),
+
+(13,'Chauvin','Ines',1568,'Monteur',450),
+(74,'Dubeau','Jules',1251,'Monteur',450),
+(124,'Lacombe','Éric',1581,'Opérateur',450),
+(263,'Lebrun','Laurent',1500,'Ouvrier',450),
+(99,'Duffet','Charles',1233,'Ouvrier',450),
+(29,'Tachel','Simone',1551,'Ouvrier',450),
+
+(412,'Robitaille','Laurence',1575,'Monteur',1005),
+(38,'Sciverit','Pauline',1208,'Ouvrier',1005),
+(44,'Veilleux','Gérard',1217,'Opérateur',1005),
+(64,'Pantier','Fréderic',1237,'Opérateur',1005),
+(23,'Lafontaine','Antoine',1455,'Ouvrier',1005),
+(06,'Frappier','Thibault',1634,'Ouvrier',1005),
+
+(239,'Frabre','Franck',1258,'Monteur',4230),
+(333,'Rousseau','Simone',1424,'Monteur',4230),
+(40,'Chauveau','Charles',1424,'Opérateur',4230),
+(81,'Alain','Mendes',1607,'Ouvrier',4230),
+(311,'Lefrançois','Paul',1283,'Ouvrier',4230),
+(52,'Charles','Christophe',1543,'Ouvrier',4230),
+
+(420,'Bonnet','Mélanie',1506,'Ouvrier',1061),
+(02,'Wagner','Céline',1273,'Monteur',1061),
+(133,'Tessier','Lucas',1260,'Opérateur',1061),
+(198,'Salmon','Thibault',1698,'Opérateur',1061),
+(103,'Loiseau','Georges',1273,'Ouvrier',1061),
+(456,'Noel','Maurice',1349,'Ouvrier',1061),
+
+(174,'Barre','Michelle',1268,'Monteur',620),
+(60,'Legrand','Patrick',1544,'Ouvrier',620),
+(26,'Dumont','Théophile',1250,'Ouvrier',620),
+(496,'Boyer','Alice',1535,'Ouvrier',620),
+(09,'Dijoux','Jean',1482,'Ouvrier',620),
+(69,'Leconte','Amélie',1413,'Ouvrier',620),
+
+(213,'Marechal','Auguste',1625,'Monteur',8512),
+(85,'Bailly','Chantal',1516,'Ouvrier',8512),
+(186,'Dupot','Xavier',1506,'Ouvrier',8512),
+(97,'Michaut','Benoit',1518,'Opérateur',8512),
+(19,'Le Roux','Sylvie',1478,'Monteur',8512),
+(143,'Parent','Guy',1334,'Ouvrier',8512),
+
+(220,'Pazart','Dorothée',1341,'Ouvrier',1320),
+(31,'Jacquot','Richard',1412,'Monteur',1320),
+(327,'Perret','Martin',1229,'Opérateur',1320),
+(126,'Chevallier','Sabine',1210,'Monteur',1320),
+(300,'Jourdan','Emanuelle',1541,'Ouvrier',1320),
+(256,'Valette','Alexis',1501,'Opérateur',1320),
+
+(417,'Basser','Maurice',1572,'Monteur',8130),
+(47,'Antoine','Thomas',1542,'Ouvrier',8130),
+(268,'Porc','Francis',1391,'Opérateur',8130),
+(15,'Baron','Dominique',1321,'Ouvrier',8130),
+(86,'Lamour','Laurianne',1539,'Monteur',8130),
+(57,'Leleu','Yves',1306,'Ouvrier',8130),
+
+(366,'Blot','Brigitte',1515,'Ouvrier',1312),
+(231,'Brunet','Louis',1626,'Monteur',1312),
+(282,'Rousset','Élise',1326,'Monteur',1312),
+(70,'Pelletier','William',1378,'Monteur',1312),
+(423,'Rodrigues','Mathieu',1453,'Opérateur',1312),
+(331,'Guyon','Tristan',1471,'Ouvrier',1312),
+
+(158,'Guerin','Jacques',1257,'Ouvrier',2520),
+(471,'Morvan','Joséphine',1316,'Ouvrier',2520),
+(225,'Louis','Alain',1672,'Opérateur',2520),
+(301,'Nardin','Guillaume',1589,'Monteur',2520),
+(270,'Moreau','Rémy',1225,'Ouvrier',2520),
+(87,'Bruitage','Jean-Michel',1492,'Monteur',2520),
+
+(278,'Bernier','Sébastien',1406,'Monteur',5640),
+(354,'Peugnet','Hugues',1336,'Opérateur',5640),
+(114,'Laurent','Anaïs',1212,'Ouvrier',5640),
+(266,'Perrier','Lucie',1259,'Ouvrier',5640),
+(325,'Turpin','Adrien',1250,'Monteur',5640),
+(250,'Leblin','Léon',1605,'Ouvrier',5640),
+
+(319,'Cohen','Arthur',1234,'Ouvrier',3005),
+(236,'Laurent','Guy',1335,'Ouvrier',3005),
+(162,'Humbert','Antoine',1206,'Ouvrier',3005),
+(388,'Petitjean','Gabriel',1241,'Opérateur',3005),
+(203,'Muller','André',1340,'Opérateur',3005),
+(481,'Victor','David',1381,'Monteur',3005),
+
+(411,'Duros','Aimée',1526,'Ouvrier',5120),
+(188,'Leclerc','Jacques',1553,'Monteur',5120),
+(264,'Hamel','Émile',1637,'Monteur',5120),
+(397,'Laine','Valérie',1616,'Opérateur',5120),
+(160,'Blanchard','Émeric',1390,'Ouvrier',5120),
+(170,'Vallée','Charlotte',1447,'Ouvrier',5120),
+
+(369,'Salomon','Denis',1494,'Ouvrier',6502),
+(178,'Grondin','Axelle',1692,'Opérateur',6502),
+(283,'Pottier','Hervé',1351,'Monteur',6502),
+(407,'Mascou','Aurélie',1275,'Ouvrier',6502),
+(237,'Chesnou','Colin',1569,'Ouvrier',6502),
+(361,'Regnier','Caroline',1695,'Monteur',6502);
